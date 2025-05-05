@@ -28,6 +28,7 @@
         align-items: center;
         grid-template-columns: 1fr 600px;
         gap: 100px;
+        z-index: 2;
       }
 
       header img {
@@ -43,6 +44,39 @@
         background-image: radial-gradient(#91000cb4, #99a0973d);
         height: 100vh;
         position: relative;
+
+        & .list{
+          width: 70vw;
+          height: 100%;
+          margin: auto;
+          position: relative;
+
+          & .item {
+            position: absolute;
+            inset: 0;
+
+            & .car-img {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 70%;
+
+            & img{
+              width: 100%;
+              transform: rotate(-20deg);  /*Aqui voce mexe na rotacao da imagem */
+            }
+            
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 10px;
+              }
+            }
+
+          }
+
+        }
       }
 
       .arrows button img {
