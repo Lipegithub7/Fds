@@ -6,6 +6,7 @@
     <title>Home</title>
 
     <style>
+      /* Reset básico e boas práticas */
       * {
         margin: 0;
         padding: 0;
@@ -44,43 +45,109 @@
         background-image: radial-gradient(#91000cb4, #99a0973d);
         height: 100vh;
         position: relative;
+      }
 
-        & .list{
-          width: 70vw;
-          height: 100%;
-          margin: auto;
-          position: relative;
+      section .list {
+        width: 70vw;
+        height: 100%;
+        margin: auto;
+        position: relative;
+      }
 
-          & .item {
-            position: absolute;
-            inset: 0;
+      section .list .item {
+        position: absolute;
+        inset: 0;
+      }
 
-            & .car-img {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 70%;
+      section .list .item .car-img {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 70%;
+      }
 
-            & img{
-              width: 100%;
-              transform: rotate(-20deg);  /*Aqui voce mexe na rotacao da imagem */
-            }
-            
-              img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                border-radius: 10px;
-              }
-            }
+      section .list .item .car-img img {
+        width: 100%;
+        transform: rotate(-20deg); /* Rotação da imagem do carro */
+      }
 
-          }
+      section .list .item .content {
+        position: absolute;
+        right: 100px;
+        width: 70%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        align-items: end;
+        gap: 20px;
+      }
 
-        }
+      section .list .item .content .car-information {
+        font-weight: bold;
+      }
+
+      section .list .item .content h2 {
+        font-size: 8em;
+        line-height: 1em;
+      }
+
+      section .list .item .content .description {
+        color: #c0bdbd;
+        font-size: 12px;
+        text-align: right;
+        max-width: 400px;
+      }
+
+      section .list .item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      .arrows {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 20px;
+        z-index: 1;
       }
 
       .arrows button img {
-        width: 100px;
+        width: 100px; /* tamanho das setas */
+      }
+
+      .indicators {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        text-align: right;
+      }
+
+      .indicators .number {
+        font-size: 2em;
+        margin-bottom: 10px;
+      }
+
+      .indicators ul {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+      }
+
+      .indicators ul li {
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
+        border-radius: 50%;
+        opacity: 0.3;
+      }
+
+      .indicators ul li.active {
+        opacity: 1;
       }
     </style>
   </head>
@@ -95,14 +162,15 @@
         </ul>
       </nav>
     </header>
+
     <section>
       <div class="list">
         <div class="item">
           <div class="car-img">
-            <img src="/assets/img/911.png" alt="imagem911" />
+            <img src="/assets/img/911.png" alt="imagem do Porsche 911" />
           </div>
           <div class="content">
-            <p class="car-information">Unico Dono</p>
+            <p class="car-information">Único Dono</p>
             <h2>911</h2>
             <p class="description">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
