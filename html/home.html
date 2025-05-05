@@ -4,6 +4,51 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        list-style: none;
+      }
+
+      body {
+        background-color: #000;
+        color: #fff;
+        font-size: 16px;
+      }
+
+      header {
+        position: fixed;
+        width: 80vw;
+        left: 50%;
+        transform: translateX(-50%);
+        display: grid;
+        align-items: center;
+        grid-template-columns: 1fr 600px;
+        gap: 100px;
+      }
+
+      header img {
+        width: 250px;
+      }
+
+      header nav ul {
+        display: grid;
+        grid-template-columns: repeat(3, 200px);
+      }
+
+      section {
+        background-image: radial-gradient(#91000cb4, #99a0973d);
+        height: 100vh;
+        position: relative;
+      }
+
+      .arrows button img {
+        width: 100px;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -23,10 +68,7 @@
             <img src="/assets/img/911.png" alt="imagem911" />
           </div>
           <div class="content">
-            <p class="car-information">
-              <!-- Informacao do bagulho -->
-              Unico Dono
-            </p>
+            <p class="car-information">Unico Dono</p>
             <h2>911</h2>
             <p class="description">
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -37,6 +79,20 @@
             <button>Saiba Mais</button>
           </div>
         </div>
+      </div>
+
+      <div class="arrows">
+        <button><img src="/assets/img/seta.png" alt="seta esquerda" /></button>
+        <button><img src="/assets/img/seta.png" alt="seta direita" /></button>
+      </div>
+
+      <div class="indicators">
+        <div class="number">01</div>
+        <ul>
+          <li class="active"></li>
+          <li></li>
+          <li></li>
+        </ul>
       </div>
     </section>
   </body>
