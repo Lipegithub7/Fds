@@ -10,8 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Single+Day&display=swap');
-
     * {
       margin: 0;
       padding: 0;
@@ -19,22 +17,37 @@
       font-family: 'Outfit', sans-serif;
     }
 
+    body, html {
+      height: 100%;
+      width: 100%;
+    }
+
     body {
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background: url('/assets/img/wall3.jpg') no-repeat;
-      background-position: center;
-      background-size: cover;
+      position: relative;
+    }
+
+    #videoFundo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
     }
 
     .wrapper {
-      width: 420px;
+      width: 100%;
+      max-width: 420px;
       background: rgba(0, 0, 0, 0.5);
       color: #fff;
       border-radius: 10px;
       padding: 30px 40px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
 
     .wrapper h1 {
@@ -116,7 +129,7 @@
     }
 
     .register-link p a {
-      color: #fff;
+      color: #ffffff;
       text-decoration: none;
       font-weight: 600;
     }
@@ -127,6 +140,11 @@
   </style>
 </head>
 <body>
+
+  <video autoplay muted loop id="videoFundo">
+    <source src="/assets/img/wale.mp4" type="video/mp4">
+  </video>
+
   <div class="wrapper">
     <form onsubmit="return validarLogin(event)">
       <h1>Login</h1>
@@ -171,5 +189,6 @@
       }
     }
   </script>
+
 </body>
 </html>
