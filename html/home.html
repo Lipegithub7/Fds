@@ -3,114 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lipe</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body, html {
-            height: 100%;
-        }
-
-        .video-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            object-fit: cover;
-            z-index: -1;
-        }
-
-        nav {
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: transparent;
-            display: flex;
-            justify-content: center;
-            padding: 15px 0;
-            z-index: 2;
-            flex-direction: column;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 200px;
-            justify-content: center;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
-            font-family: Arial, sans-serif;
-            transition: color 0.3s;
-        }
-
-        nav ul li a:hover {
-            color: #ffd700;
-        }
-
-        /* Linha personalizada animada */
-        .nav-line {
-            height: 4px;
-            width: 100%;
-            background: linear-gradient(90deg, black, white, black);
-            background-size: 200% auto;
-            animation: moveLine 2s linear infinite;
-        }
-
-        @keyframes moveLine {
-            100% {
-                background-position: 0% 0;
-            }
-            0% {
-                background-position: 200% 0;
-            }
-        }
-
-        .content {
-            position: relative;
-            z-index: 1;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            padding-top: 100px;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/stylehome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Fds</title>
 </head>
 <body>
+    
+    <header>
+        <a href="#" class="logo">Lipe</a>
+        <nav>
+            <a href="" class="active">Início</a>
+            <a href="/html/estudos.html">Estudos</a>
+            <a href="#">Músicas</a>
+            <a href="#">Jogos</a>
+            <a href="#">90 days</a>
+            <a href="#">Configurações</a>
+        </nav>
+    </header>
 
-    <video autoplay muted loop class="video-bg">
-        <source src="/assets/img/iniciowal.mp4" type="video/mp4">
-        Seu navegador não suporta vídeo em HTML5.
-    </video>
+    <section class="home">
+        <div class="home-img">
+            <img src="/assets/img/spotify.png" alt="logo">
+        </div>
 
-    <nav>
-        <ul>
-            <li><a href="#">Início</a></li>
-            <li><a href="#">Estudos</a></li>
-            <li><a href="#">Músicas</a></li>
-            <li><a href="#">Jogos</a></li>
-            <li><a href="#">90 Days</a></li>
-            <li><a href="#">Configuração</a></li>
-        </ul>
-        <div class="nav-line"></div>
-    </nav>
+        <div class="home-content">
+            <h1>Você é lindo <span>Lipe</span></h1>
+            <h3 class="typing-text">Site Criado <span></span></h3>
+            <p>Lorem ipsum dolor sit amet consectetur 
+                adipisicing elit. Minima unde quaerat 
+                ratione laborum exercitationem, qui 
+                atque sapiente quidem nam nisi non 
+                quod suscipit vero dignissimos dolorem
+                amet animi maiores eos!</p>
 
-    <div class="content">
-        <h1>Oi</h1>
-    </div>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            </div>
 
+            <a href="#" class="btn">Entre aí!</a>
+        </div>
+    </section>
 </body>
 </html>

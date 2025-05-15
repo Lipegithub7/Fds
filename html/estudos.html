@@ -1,0 +1,245 @@
+  <!DOCTYPE html>
+  <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/css/styleestudos.css" />
+    <title>Lipe - Anotações</title>
+    
+  </head>
+  <body>
+
+    <header>
+      <a href="#" class="logo">Lipe</a>
+      <nav>
+        <a href="/html/home.html" class="active">Início</a>
+        <a href="/html/estudos.html">Estudos</a>
+        <a href="#">Músicas</a>
+        <a href="#">Jogos</a>
+        <a href="#">90 days</a>
+        <a href="#">Configurações</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="anotacoes">
+        <h1>🧠 Anotações</h1>
+        <textarea placeholder="Escreva suas anotações aqui..."></textarea>
+        <button><span>💾</span> Salvar Anotações</button>
+
+        <div id="lista-anotacoes">
+          <h2>Anotações Salvas</h2>
+          <ul></ul>
+        </div>
+      </section>
+
+      <section id="academico">
+        <h1>🚀 Desenvolvimento Pessoal</h1>
+        <p>“Antes de julgar, certifique-se que és perfeito.”</p>
+
+        <input
+          type="text"
+          id="input-video"
+          placeholder="Cole o link do vídeo do YouTube aqui"
+        />
+        <button id="btn-adicionar">Adicionar Vídeo</button>
+
+        <div class="carrossel-container">
+          <button class="carrossel-btn anterior" aria-label="Anterior">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+
+          <div class="carrossel-videos">
+            <div class="video-slide active">
+              <a href="https://youtu.be/VZpDhZNzZuM?si=U850RWwG1Q7AalmI" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.youtube.com/vi/VZpDhZNzZuM/hqdefault.jpg" alt="Vídeo 1 Thumbnail" />
+              </a>
+            </div>
+            <div class="video-slide">
+              <a href="https://youtu.be/KDLOhUJ38Hw?si=IbfQuKpnxobHBQn3" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.youtube.com/vi/KDLOhUJ38Hw/hqdefault.jpg" alt="Vídeo 2 Thumbnail" />
+              </a>
+            </div>
+            <div class="video-slide">
+              <a href="https://youtu.be/MZcr14hL8lI?si=OTwnXnAWDD0AkqhxY" target="_blank" rel="noopener noreferrer">
+                <img src="https://img.youtube.com/vi/MZcr14hL8lI/hqdefault.jpg" alt="Vídeo 3 Thumbnail" />
+              </a>
+            </div>
+          </div>
+
+          <button class="carrossel-btn proximo" aria-label="Próximo">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </section>
+
+      <section id="pessoal">
+        <h1>🚀 Desenvolvimento Pessoal</h1>
+        <p>“A disciplina é a ponte entre metas e realizações.”</p>
+      </section>
+    </main>
+
+    <div id="popup-sucesso">✅ Anotação salva com sucesso!</div>
+
+    <script>
+      // Anotações
+      const textarea = document.querySelector('#anotacoes textarea');
+      const btnSalvar = document.querySelector('#anotacoes button');
+      const listaUl = document.querySelector('#lista-anotacoes ul');
+      const popup = document.getElementById('popup-sucesso');
+    
+      function carregarAnotacoes() {
+        const anotacoes = JSON.parse(localStorage.getItem('anotacoes')) || [];
+        listaUl.innerHTML = '';
+        anotacoes.forEach((anotacao, index) => {
+          const li = document.createElement('li');
+          const primeiraPalavra = anotacao.split(/\s+/)[0];
+          li.textContent = primeiraPalavra;
+    
+          li.onclick = () => alert(anotacao);
+    
+          const btnExcluir = document.createElement('button');
+          btnExcluir.textContent = '×';
+          btnExcluir.title = 'Excluir anotação';
+          btnExcluir.onclick = (e) => {
+            e.stopPropagation();
+            excluirAnotacao(index);
+          };
+    
+          li.appendChild(btnExcluir);
+          listaUl.appendChild(li);
+        });
+      }
+    
+      function salvarAnotacao() {
+        const texto = textarea.value.trim();
+        if (texto === '') {
+          alert('Por favor, escreva uma anotação antes de salvar.');
+          return;
+        }
+        let anotacoes = JSON.parse(localStorage.getItem('anotacoes')) || [];
+        anotacoes.push(texto);
+        localStorage.setItem('anotacoes', JSON.stringify(anotacoes));
+        textarea.value = '';
+        carregarAnotacoes();
+        mostrarPopup();
+      }
+    
+      function excluirAnotacao(index) {
+        let anotacoes = JSON.parse(localStorage.getItem('anotacoes')) || [];
+        anotacoes.splice(index, 1);
+        localStorage.setItem('anotacoes', JSON.stringify(anotacoes));
+        carregarAnotacoes();
+      }
+    
+      function mostrarPopup() {
+        popup.classList.add('show');
+        setTimeout(() => {
+          popup.classList.remove('show');
+        }, 2500);
+      }
+    
+      btnSalvar.addEventListener('click', salvarAnotacao);
+      window.addEventListener('load', carregarAnotacoes);
+    
+      // Carrossel
+      const btnAnterior = document.querySelector('.carrossel-btn.anterior');
+      const btnProximo = document.querySelector('.carrossel-btn.proximo');
+      const carrosselVideos = document.querySelector('.carrossel-videos');
+      const inputVideo = document.getElementById('input-video');
+      const btnAdicionar = document.getElementById('btn-adicionar');
+    
+      let slides = document.querySelectorAll('.video-slide');
+      let slideAtual = 0;
+    
+      function mostrarSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.remove('active');
+          if (i === index) {
+            slide.classList.add('active');
+          }
+        });
+      }
+    
+      function atualizarSlides() {
+        slides = document.querySelectorAll('.video-slide');
+        if (slides.length === 0) {
+          slideAtual = 0;
+          return;
+        }
+        if (slideAtual >= slides.length) {
+          slideAtual = slides.length - 1;
+        }
+        if (slideAtual < 0) {
+          slideAtual = 0;
+        }
+        mostrarSlide(slideAtual);
+      }
+    
+      function extrairIdYoutube(url) {
+        const regex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|embed|shorts|watch)(?:\?v=|\/))|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+        const match = url.match(regex);
+        return match ? match[1] : null;
+      }
+    
+      function adicionarVideo(url) {
+        const id = extrairIdYoutube(url);
+        if (!id) {
+          alert('URL inválida ou não é um vídeo do YouTube.');
+          return;
+        }
+    
+        const novoSlide = document.createElement('div');
+        novoSlide.className = 'video-slide';
+    
+        const link = document.createElement('a');
+        link.href = `https://youtu.be/${id}`;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+    
+        const img = document.createElement('img');
+        img.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+        img.alt = `Vídeo do YouTube ${id}`;
+    
+        link.appendChild(img);
+        novoSlide.appendChild(link);
+    
+        carrosselVideos.appendChild(novoSlide);
+    
+        slides = document.querySelectorAll('.video-slide');
+        slideAtual = slides.length - 1;
+    
+        mostrarSlide(slideAtual);
+        inputVideo.value = '';
+      }
+    
+      btnAdicionar.addEventListener('click', () => {
+        const url = inputVideo.value.trim();
+        if (url) {
+          adicionarVideo(url);
+        } else {
+          alert('Por favor, cole um link do vídeo do YouTube.');
+        }
+      });
+    
+      btnAnterior.addEventListener('click', () => {
+        if (slides.length === 0) return;
+        slideAtual = (slideAtual - 1 + slides.length) % slides.length;
+        mostrarSlide(slideAtual);
+      });
+    
+      btnProximo.addEventListener('click', () => {
+        if (slides.length === 0) return;
+        slideAtual = (slideAtual + 1) % slides.length;
+        mostrarSlide(slideAtual);
+      });
+    
+      window.addEventListener('load', () => {
+        slides = document.querySelectorAll('.video-slide');
+        if (slides.length > 0) {
+          mostrarSlide(slideAtual);
+        }
+      });
+    </script>
+    
