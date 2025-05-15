@@ -19,53 +19,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* HEADER */
 
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.5rem 9%;
-  z-index: 1000;
-}
 
-.logo {
-  font-size: 3rem;
-  font-weight: 800;
-  color: #ff1f1f;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  filter: drop-shadow(0 0 10px rgba(255, 31, 31, 0.7));
-}
 
-.logo:hover {
-  transform: scale(1.1);
-}
 
-nav {
-  display: flex;
-  gap: 4rem;
-}
 
-nav a {
-  color: #fff;
-  font-weight: 500;
-  text-decoration: none;
-  font-size: 1.8rem;
-  padding-bottom: 4px;
-  transition: color 0.3s, border-bottom 0.3s;
-}
-
-nav a:hover,
-nav a.active {
-  color: #ff1f1f;
-  border-bottom: 3px solid #ff1f1f;
-  font-weight: 700;
-}
 
 /* MAIN */
 
@@ -320,28 +278,38 @@ main {
 
 /* INPUT E BOTÃO DO VÍDEO */
 
+.video-input-wrapper {
+  display: flex;
+  gap: 10px;
+  margin: 15px 0 20px 0;
+}
+
 #input-video {
-  width: 100%;
+  flex: 1;
   padding: 10px;
-  font-size: 1.6rem;
-  margin: 15px 0 10px 0;
+  font-size: 1.4rem;
   border-radius: 8px;
   border: 2px solid #ff1f1f;
 }
 
-#btn-adicionar {
-  padding: 10px 20px;
-  font-size: 1.6rem;
-  font-weight: 700;
+#btn-adicionar.btn-video {
+  padding: 10px;
   background: #ff1f1f;
   color: #fff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  margin-bottom: 20px;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-#btn-adicionar:hover {
+#btn-adicionar.btn-video:hover {
   background-color: #e01717;
+  transform: scale(1.20);
+}
+
+#btn-adicionar.btn-video i {
+  font-size: 1.2rem;
 }

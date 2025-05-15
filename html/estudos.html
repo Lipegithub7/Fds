@@ -1,27 +1,17 @@
-  <!DOCTYPE html>
-  <html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="stylesheet" href="/css/styleestudos.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="../css/styleestudos.css" />
     <title>Lipe - Anotações</title>
-    
   </head>
   <body>
-
-    <header>
-      <a href="#" class="logo">Lipe</a>
-      <nav>
-        <a href="/html/home.html" class="active">Início</a>
-        <a href="/html/estudos.html">Estudos</a>
-        <a href="#">Músicas</a>
-        <a href="#">Jogos</a>
-        <a href="#">90 days</a>
-        <a href="#">Configurações</a>
-      </nav>
-    </header>
-
+    <div id="header-placeholder"></div>
     <main>
       <section id="anotacoes">
         <h1>🧠 Anotações</h1>
@@ -38,12 +28,16 @@
         <h1>🚀 Desenvolvimento Pessoal</h1>
         <p>“Antes de julgar, certifique-se que és perfeito.”</p>
 
-        <input
-          type="text"
-          id="input-video"
-          placeholder="Cole o link do vídeo do YouTube aqui"
-        />
-        <button id="btn-adicionar">Adicionar Vídeo</button>
+        <div class="video-input-wrapper">
+          <input
+            type="text"
+            id="input-video"
+            placeholder="Cole o link do vídeo do YouTube aqui"
+          />
+          <button id="btn-adicionar" class="btn-video" title="Adicionar vídeo">
+            <i class="fas fa-plus"></i>
+          </button>
+        </div>
 
         <div class="carrossel-container">
           <button class="carrossel-btn anterior" aria-label="Anterior">
@@ -52,18 +46,39 @@
 
           <div class="carrossel-videos">
             <div class="video-slide active">
-              <a href="https://youtu.be/VZpDhZNzZuM?si=U850RWwG1Q7AalmI" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/VZpDhZNzZuM/hqdefault.jpg" alt="Vídeo 1 Thumbnail" />
+              <a
+                href="https://youtu.be/VZpDhZNzZuM?si=U850RWwG1Q7AalmI"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="https://img.youtube.com/vi/VZpDhZNzZuM/hqdefault.jpg"
+                  alt="Vídeo 1 Thumbnail"
+                />
               </a>
             </div>
             <div class="video-slide">
-              <a href="https://youtu.be/KDLOhUJ38Hw?si=IbfQuKpnxobHBQn3" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/KDLOhUJ38Hw/hqdefault.jpg" alt="Vídeo 2 Thumbnail" />
+              <a
+                href="https://youtu.be/KDLOhUJ38Hw?si=IbfQuKpnxobHBQn3"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="https://img.youtube.com/vi/KDLOhUJ38Hw/hqdefault.jpg"
+                  alt="Vídeo 2 Thumbnail"
+                />
               </a>
             </div>
             <div class="video-slide">
-              <a href="https://youtu.be/MZcr14hL8lI?si=OTwnXnAWDD0AkqhxY" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/MZcr14hL8lI/hqdefault.jpg" alt="Vídeo 3 Thumbnail" />
+              <a
+                href="https://youtu.be/MZcr14hL8lI?si=OTwnXnAWDD0AkqhxY"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src="https://img.youtube.com/vi/MZcr14hL8lI/hqdefault.jpg"
+                  alt="Vídeo 3 Thumbnail"
+                />
               </a>
             </div>
           </div>
@@ -84,86 +99,86 @@
 
     <script>
       // Anotações
-      const textarea = document.querySelector('#anotacoes textarea');
-      const btnSalvar = document.querySelector('#anotacoes button');
-      const listaUl = document.querySelector('#lista-anotacoes ul');
-      const popup = document.getElementById('popup-sucesso');
-    
+      const textarea = document.querySelector("#anotacoes textarea");
+      const btnSalvar = document.querySelector("#anotacoes button");
+      const listaUl = document.querySelector("#lista-anotacoes ul");
+      const popup = document.getElementById("popup-sucesso");
+
       function carregarAnotacoes() {
-        const anotacoes = JSON.parse(localStorage.getItem('anotacoes')) || [];
-        listaUl.innerHTML = '';
+        const anotacoes = JSON.parse(localStorage.getItem("anotacoes")) || [];
+        listaUl.innerHTML = "";
         anotacoes.forEach((anotacao, index) => {
-          const li = document.createElement('li');
+          const li = document.createElement("li");
           const primeiraPalavra = anotacao.split(/\s+/)[0];
           li.textContent = primeiraPalavra;
-    
+
           li.onclick = () => alert(anotacao);
-    
-          const btnExcluir = document.createElement('button');
-          btnExcluir.textContent = '×';
-          btnExcluir.title = 'Excluir anotação';
+
+          const btnExcluir = document.createElement("button");
+          btnExcluir.textContent = "×";
+          btnExcluir.title = "Excluir anotação";
           btnExcluir.onclick = (e) => {
             e.stopPropagation();
             excluirAnotacao(index);
           };
-    
+
           li.appendChild(btnExcluir);
           listaUl.appendChild(li);
         });
       }
-    
+
       function salvarAnotacao() {
         const texto = textarea.value.trim();
-        if (texto === '') {
-          alert('Por favor, escreva uma anotação antes de salvar.');
+        if (texto === "") {
+          alert("Por favor, escreva uma anotação antes de salvar.");
           return;
         }
-        let anotacoes = JSON.parse(localStorage.getItem('anotacoes')) || [];
+        let anotacoes = JSON.parse(localStorage.getItem("anotacoes")) || [];
         anotacoes.push(texto);
-        localStorage.setItem('anotacoes', JSON.stringify(anotacoes));
-        textarea.value = '';
+        localStorage.setItem("anotacoes", JSON.stringify(anotacoes));
+        textarea.value = "";
         carregarAnotacoes();
         mostrarPopup();
       }
-    
+
       function excluirAnotacao(index) {
-        let anotacoes = JSON.parse(localStorage.getItem('anotacoes')) || [];
+        let anotacoes = JSON.parse(localStorage.getItem("anotacoes")) || [];
         anotacoes.splice(index, 1);
-        localStorage.setItem('anotacoes', JSON.stringify(anotacoes));
+        localStorage.setItem("anotacoes", JSON.stringify(anotacoes));
         carregarAnotacoes();
       }
-    
+
       function mostrarPopup() {
-        popup.classList.add('show');
+        popup.classList.add("show");
         setTimeout(() => {
-          popup.classList.remove('show');
+          popup.classList.remove("show");
         }, 2500);
       }
-    
-      btnSalvar.addEventListener('click', salvarAnotacao);
-      window.addEventListener('load', carregarAnotacoes);
-    
+
+      btnSalvar.addEventListener("click", salvarAnotacao);
+      window.addEventListener("load", carregarAnotacoes);
+
       // Carrossel
-      const btnAnterior = document.querySelector('.carrossel-btn.anterior');
-      const btnProximo = document.querySelector('.carrossel-btn.proximo');
-      const carrosselVideos = document.querySelector('.carrossel-videos');
-      const inputVideo = document.getElementById('input-video');
-      const btnAdicionar = document.getElementById('btn-adicionar');
-    
-      let slides = document.querySelectorAll('.video-slide');
+      const btnAnterior = document.querySelector(".carrossel-btn.anterior");
+      const btnProximo = document.querySelector(".carrossel-btn.proximo");
+      const carrosselVideos = document.querySelector(".carrossel-videos");
+      const inputVideo = document.getElementById("input-video");
+      const btnAdicionar = document.getElementById("btn-adicionar");
+
+      let slides = document.querySelectorAll(".video-slide");
       let slideAtual = 0;
-    
+
       function mostrarSlide(index) {
         slides.forEach((slide, i) => {
-          slide.classList.remove('active');
+          slide.classList.remove("active");
           if (i === index) {
-            slide.classList.add('active');
+            slide.classList.add("active");
           }
         });
       }
-    
+
       function atualizarSlides() {
-        slides = document.querySelectorAll('.video-slide');
+        slides = document.querySelectorAll(".video-slide");
         if (slides.length === 0) {
           slideAtual = 0;
           return;
@@ -176,70 +191,86 @@
         }
         mostrarSlide(slideAtual);
       }
-    
+
       function extrairIdYoutube(url) {
-        const regex = /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|embed|shorts|watch)(?:\?v=|\/))|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+        const regex =
+          /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|embed|shorts|watch)(?:\?v=|\/))|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
         const match = url.match(regex);
         return match ? match[1] : null;
       }
-    
+
       function adicionarVideo(url) {
         const id = extrairIdYoutube(url);
         if (!id) {
-          alert('URL inválida ou não é um vídeo do YouTube.');
+          alert("URL inválida ou não é um vídeo do YouTube.");
           return;
         }
-    
-        const novoSlide = document.createElement('div');
-        novoSlide.className = 'video-slide';
-    
-        const link = document.createElement('a');
+
+        const novoSlide = document.createElement("div");
+        novoSlide.className = "video-slide";
+
+        const link = document.createElement("a");
         link.href = `https://youtu.be/${id}`;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-    
-        const img = document.createElement('img');
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+
+        const img = document.createElement("img");
         img.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
         img.alt = `Vídeo do YouTube ${id}`;
-    
+
         link.appendChild(img);
         novoSlide.appendChild(link);
-    
+
         carrosselVideos.appendChild(novoSlide);
-    
-        slides = document.querySelectorAll('.video-slide');
+
+        slides = document.querySelectorAll(".video-slide");
         slideAtual = slides.length - 1;
-    
+
         mostrarSlide(slideAtual);
-        inputVideo.value = '';
+        inputVideo.value = "";
       }
-    
-      btnAdicionar.addEventListener('click', () => {
+
+      btnAdicionar.addEventListener("click", () => {
         const url = inputVideo.value.trim();
         if (url) {
           adicionarVideo(url);
         } else {
-          alert('Por favor, cole um link do vídeo do YouTube.');
+          alert("Por favor, cole um link do vídeo do YouTube.");
         }
       });
-    
-      btnAnterior.addEventListener('click', () => {
+
+      btnAnterior.addEventListener("click", () => {
         if (slides.length === 0) return;
         slideAtual = (slideAtual - 1 + slides.length) % slides.length;
         mostrarSlide(slideAtual);
       });
-    
-      btnProximo.addEventListener('click', () => {
+
+      btnProximo.addEventListener("click", () => {
         if (slides.length === 0) return;
         slideAtual = (slideAtual + 1) % slides.length;
         mostrarSlide(slideAtual);
       });
-    
-      window.addEventListener('load', () => {
-        slides = document.querySelectorAll('.video-slide');
+
+      window.addEventListener("load", () => {
+        slides = document.querySelectorAll(".video-slide");
         if (slides.length > 0) {
           mostrarSlide(slideAtual);
         }
+        fetch('/components/header.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+
+        const currentPage = location.pathname.split('/').pop();
+        document.querySelectorAll('#header-placeholder nav a').forEach(link => {
+          if (link.href.includes(currentPage)) {
+            link.classList.add('active');
+          }
+        });
+        });
       });
     </script>
+
+  </body>
+</html>
     

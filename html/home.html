@@ -1,49 +1,56 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/stylehome.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/stylehome.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
     <title>Fds</title>
-</head>
-<body>
-    
-    <header>
-        <a href="#" class="logo">Lipe</a>
-        <nav>
-            <a href="" class="active">Início</a>
-            <a href="/html/estudos.html">Estudos</a>
-            <a href="#">Músicas</a>
-            <a href="#">Jogos</a>
-            <a href="#">90 days</a>
-            <a href="#">Configurações</a>
-        </nav>
-    </header>
-
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
     <section class="home">
-        <div class="home-img">
-            <img src="/assets/img/spotify.png" alt="logo">
+      <div class="home-img">
+        <img src="/assets/img/spotify.png" alt="logo" />
+      </div>
+
+      <div class="home-content">
+        <h1>Você é lindo <span>Lipe</span></h1>
+        <h3 class="typing-text">Site Criado <span></span></h3>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima unde
+          quaerat ratione laborum exercitationem, qui atque sapiente quidem nam
+          nisi non quod suscipit vero dignissimos dolorem amet animi maiores
+          eos!
+        </p>
+
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-github"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
         </div>
 
-        <div class="home-content">
-            <h1>Você é lindo <span>Lipe</span></h1>
-            <h3 class="typing-text">Site Criado <span></span></h3>
-            <p>Lorem ipsum dolor sit amet consectetur 
-                adipisicing elit. Minima unde quaerat 
-                ratione laborum exercitationem, qui 
-                atque sapiente quidem nam nisi non 
-                quod suscipit vero dignissimos dolorem
-                amet animi maiores eos!</p>
-
-            <div class="social-icons">
-                <a href="#"><i class="fa-brands fa-github"></i></a>
-                <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-            </div>
-
-            <a href="#" class="btn">Entre aí!</a>
-        </div>
+        <a href="#" class="btn">Entre aí!</a>
+      </div>
     </section>
-</body>
+    <script>
+      fetch("/components/header.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("header-placeholder").innerHTML = data;
+
+          const currentPage = location.pathname.split("/").pop();
+          document
+            .querySelectorAll("#header-placeholder nav a")
+            .forEach((link) => {
+              if (link.href.includes(currentPage)) {
+                link.classList.add("active");
+              }
+            });
+        });
+    </script>
+  </body>
 </html>
