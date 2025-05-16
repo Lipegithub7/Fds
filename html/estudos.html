@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <link rel="stylesheet" href="../css/styleestudos.css" />
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
     <title>Lipe - Anotações</title>
   </head>
   <body>
@@ -15,8 +18,8 @@
     <main>
       <section id="anotacoes">
         <h1>🧠 Anotações</h1>
-        <textarea placeholder="Escreva suas anotações aqui..."></textarea>
-        <button><span>💾</span> Salvar Anotações</button>
+        <textarea class="form-control" placeholder="Escreva suas anotações aqui..."></textarea>
+        <button class="btn btn-primary"><span>💾</span> Salvar Anotações</button>
 
         <div id="lista-anotacoes">
           <h2>Anotações Salvas</h2>
@@ -90,7 +93,7 @@
       </section>
 
       <section id="pessoal">
-        <h1>🚀 Desenvolvimento Pessoal</h1>
+        <h1>🚀 Desenvolvimento Academico</h1>
         <p>“A disciplina é a ponte entre metas e realizações.”</p>
       </section>
     </main>
@@ -98,12 +101,11 @@
     <div id="popup-sucesso">✅ Anotação salva com sucesso!</div>
 
     <script>
-      // Anotações
       const textarea = document.querySelector("#anotacoes textarea");
       const btnSalvar = document.querySelector("#anotacoes button");
       const listaUl = document.querySelector("#lista-anotacoes ul");
       const popup = document.getElementById("popup-sucesso");
-
+    
       function carregarAnotacoes() {
         const anotacoes = JSON.parse(localStorage.getItem("anotacoes")) || [];
         listaUl.innerHTML = "";
@@ -111,9 +113,9 @@
           const li = document.createElement("li");
           const primeiraPalavra = anotacao.split(/\s+/)[0];
           li.textContent = primeiraPalavra;
-
+    
           li.onclick = () => alert(anotacao);
-
+    
           const btnExcluir = document.createElement("button");
           btnExcluir.textContent = "×";
           btnExcluir.title = "Excluir anotação";
@@ -121,12 +123,12 @@
             e.stopPropagation();
             excluirAnotacao(index);
           };
-
+    
           li.appendChild(btnExcluir);
           listaUl.appendChild(li);
         });
       }
-
+    
       function salvarAnotacao() {
         const texto = textarea.value.trim();
         if (texto === "") {
@@ -140,34 +142,34 @@
         carregarAnotacoes();
         mostrarPopup();
       }
-
+    
       function excluirAnotacao(index) {
         let anotacoes = JSON.parse(localStorage.getItem("anotacoes")) || [];
         anotacoes.splice(index, 1);
         localStorage.setItem("anotacoes", JSON.stringify(anotacoes));
         carregarAnotacoes();
       }
-
+    
       function mostrarPopup() {
         popup.classList.add("show");
         setTimeout(() => {
           popup.classList.remove("show");
         }, 2500);
       }
-
+    
       btnSalvar.addEventListener("click", salvarAnotacao);
       window.addEventListener("load", carregarAnotacoes);
-
+    
       // Carrossel
       const btnAnterior = document.querySelector(".carrossel-btn.anterior");
       const btnProximo = document.querySelector(".carrossel-btn.proximo");
       const carrosselVideos = document.querySelector(".carrossel-videos");
       const inputVideo = document.getElementById("input-video");
       const btnAdicionar = document.getElementById("btn-adicionar");
-
+    
       let slides = document.querySelectorAll(".video-slide");
       let slideAtual = 0;
-
+    
       function mostrarSlide(index) {
         slides.forEach((slide, i) => {
           slide.classList.remove("active");
@@ -176,7 +178,7 @@
           }
         });
       }
-
+    
       function atualizarSlides() {
         slides = document.querySelectorAll(".video-slide");
         if (slides.length === 0) {
@@ -191,45 +193,46 @@
         }
         mostrarSlide(slideAtual);
       }
-
+    
       function extrairIdYoutube(url) {
         const regex =
           /(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|embed|shorts|watch)(?:\?v=|\/))|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
         const match = url.match(regex);
         return match ? match[1] : null;
       }
-
+    
       function adicionarVideo(url) {
         const id = extrairIdYoutube(url);
         if (!id) {
           alert("URL inválida ou não é um vídeo do YouTube.");
           return;
         }
-
+    
         const novoSlide = document.createElement("div");
-        novoSlide.className = "video-slide";
-
+        novoSlide.className = "video-slide active";
+    
         const link = document.createElement("a");
         link.href = `https://youtu.be/${id}`;
         link.target = "_blank";
         link.rel = "noopener noreferrer";
-
+    
         const img = document.createElement("img");
         img.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
         img.alt = `Vídeo do YouTube ${id}`;
-
+    
         link.appendChild(img);
         novoSlide.appendChild(link);
-
+    
+        // Remove "active" dos outros
+        slides.forEach(slide => slide.classList.remove("active"));
         carrosselVideos.appendChild(novoSlide);
-
+    
         slides = document.querySelectorAll(".video-slide");
         slideAtual = slides.length - 1;
-
         mostrarSlide(slideAtual);
         inputVideo.value = "";
       }
-
+    
       btnAdicionar.addEventListener("click", () => {
         const url = inputVideo.value.trim();
         if (url) {
@@ -238,39 +241,45 @@
           alert("Por favor, cole um link do vídeo do YouTube.");
         }
       });
-
+    
+      inputVideo.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          btnAdicionar.click();
+        }
+      });
+    
       btnAnterior.addEventListener("click", () => {
         if (slides.length === 0) return;
         slideAtual = (slideAtual - 1 + slides.length) % slides.length;
         mostrarSlide(slideAtual);
       });
-
+    
       btnProximo.addEventListener("click", () => {
         if (slides.length === 0) return;
         slideAtual = (slideAtual + 1) % slides.length;
         mostrarSlide(slideAtual);
       });
-
+    
       window.addEventListener("load", () => {
         slides = document.querySelectorAll(".video-slide");
         if (slides.length > 0) {
           mostrarSlide(slideAtual);
         }
         fetch('/components/header.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('header-placeholder').innerHTML = data;
-
-        const currentPage = location.pathname.split('/').pop();
-        document.querySelectorAll('#header-placeholder nav a').forEach(link => {
-          if (link.href.includes(currentPage)) {
-            link.classList.add('active');
-          }
-        });
-        });
+          .then(res => res.text())
+          .then(data => {
+            document.getElementById('header-placeholder').innerHTML = data;
+            const currentPage = location.pathname.split('/').pop();
+            document.querySelectorAll('#header-placeholder nav a').forEach(link => {
+              if (link.href.includes(currentPage)) {
+                link.classList.add('active');
+              }
+            });
+          });
       });
     </script>
-
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
   </body>
 </html>
     

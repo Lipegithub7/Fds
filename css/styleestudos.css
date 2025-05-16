@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -19,33 +20,29 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
-
-
-
-
-/* MAIN */
-
+/* CONTAINER PRINCIPAL */
 main {
-  margin-top: 100px;
+  margin: 40px auto 0;
   padding: 0 40px;
   max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* ANOTAÇÕES */
-
 #anotacoes {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
+header a {
+  text-decoration: none; /* tira o sublinhado */
+  border-bottom: none;   /* tira qualquer borda inferior */
+  box-shadow: none;      /* tira sombra que pareça linha */
+}
+
 #anotacoes h1 {
-  font-weight: 700;
   font-size: 2.5rem;
+  font-weight: 700;
   color: #ff1f1f;
 }
 
@@ -58,7 +55,7 @@ main {
   border-radius: 10px;
   resize: vertical;
   min-height: 150px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  transition: 0.3s;
 }
 
 #anotacoes textarea:focus {
@@ -70,36 +67,35 @@ main {
 #anotacoes button {
   align-self: flex-start;
   padding: 10px 28px;
-  font-weight: 700;
   font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 1.3px;
   color: #ff1f1f;
   background: transparent;
   border: 2px solid #ff1f1f;
   border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-  letter-spacing: 1.3px;
   display: flex;
   align-items: center;
   gap: 8px;
   box-shadow: 0 0 8px 2px rgba(255, 31, 31, 0.7);
+  transition: 0.3s;
 }
 
 #anotacoes button:hover {
   background-color: #ff1f1f;
-  color: black;
+  color: #000;
 }
 
 /* LISTA DE ANOTAÇÕES */
-
 #lista-anotacoes {
   margin-top: 20px;
+  background-color: #111;
   border: 1px solid #ff1f1f;
   border-radius: 10px;
   padding: 15px;
   max-height: 300px;
   overflow-y: auto;
-  background-color: #111;
 }
 
 #lista-anotacoes h2 {
@@ -117,13 +113,13 @@ main {
   margin-bottom: 10px;
   padding: 10px 15px;
   border-radius: 8px;
-  position: relative;
   font-size: 1.6rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: 0.3s;
+  position: relative;
 }
 
 #lista-anotacoes li:hover {
@@ -137,10 +133,10 @@ main {
   right: 10px;
   background: transparent;
   border: none;
-  color: #ff4c4c;
   font-size: 1.8rem;
-  cursor: pointer;
   font-weight: 700;
+  color: #ff4c4c;
+  cursor: pointer;
   transition: color 0.3s;
 }
 
@@ -148,8 +144,7 @@ main {
   color: #ff0000;
 }
 
-/* POPUP */
-
+/* POPUP DE SUCESSO */
 #popup-sucesso {
   position: fixed;
   top: 20px;
@@ -160,7 +155,7 @@ main {
   border-radius: 10px;
   font-weight: 700;
   font-size: 1.4rem;
-  box-shadow: 0 0 10px #ffffff;
+  box-shadow: 0 0 10px #fff;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.5s ease-in-out;
@@ -172,18 +167,16 @@ main {
   pointer-events: auto;
 }
 
-/* SESSÕES DE TEXTO */
-
+/* TEXTOS (ACADÊMICO E PESSOAL) */
 #academico,
 #pessoal {
-  margin-top: 40px;
   padding: 20px 25px;
-  background-color: transparent;
+  background: transparent;
   border-radius: 12px;
-  color: #fff;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  color: #fff;
 }
 
 #academico h1,
@@ -197,12 +190,10 @@ main {
 #pessoal p {
   font-size: 1.6rem;
   line-height: 1.6;
-  color: #fff;
   white-space: pre-line;
 }
 
 /* CARROSSEL DE VÍDEOS */
-
 .carrossel-container {
   display: flex;
   align-items: center;
@@ -213,27 +204,35 @@ main {
 }
 
 .carrossel-videos {
-  width: 720px;
-  height: 405px;
   position: relative;
+  width: 100%;
+  max-width: 720px;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 0 12px #ff0000;
-  flex-shrink: 0;
-  display: flex;
   transition: transform 0.5s ease-in-out;
-  will-change: transform;
 }
 
 .video-slide {
-  position: relative;
+  display: none;
   flex: 0 0 100%;
   max-width: 100%;
-  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #000;
 }
 
 .video-slide.active {
-  display: block;
+  display: flex;
+}
+
+.video-slide iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
 }
 
 .video-slide img {
@@ -244,28 +243,26 @@ main {
 }
 
 /* BOTÕES DO CARROSSEL */
-
 .carrossel-btn {
-  background: transparent;
-  border: none;
-  color: white;
-  font-size: 2.4rem;
-  font-weight: bold;
-  padding: 12px;
-  border-radius: 50%;
-  cursor: pointer;
   width: 56px;
   height: 56px;
+  font-size: 2.4rem;
+  font-weight: bold;
+  border: none;
+  background: transparent;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-shrink: 0;
+  justify-content: center;
+  transition: background 0.3s, transform 0.3s;
   user-select: none;
-  transition: background 0.3s;
 }
 
 .carrossel-btn:hover {
   background: #ff0000;
+  transform: scale(1.1);
 }
 
 .carrossel-btn.anterior {
@@ -276,12 +273,11 @@ main {
   margin-left: 30px;
 }
 
-/* INPUT E BOTÃO DO VÍDEO */
-
+/* INPUT E BOTÃO DE ADIÇÃO DE VÍDEO */
 .video-input-wrapper {
   display: flex;
   gap: 10px;
-  margin: 15px 0 20px 0;
+  margin: 15px 0 20px;
 }
 
 #input-video {
@@ -299,15 +295,15 @@ main {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.3s;
 }
 
 #btn-adicionar.btn-video:hover {
   background-color: #e01717;
-  transform: scale(1.20);
+  transform: scale(1.2);
 }
 
 #btn-adicionar.btn-video i {
